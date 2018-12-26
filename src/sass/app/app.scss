@@ -1,0 +1,196 @@
+$red-side-color: #ec364f;
+$active-month-color: #171717;
+$month-color: #868686;
+$week-color: #737373;
+$day-color: #959595;
+$blue-event: #1400c7;
+$year-and-next-month-color: #ccc;
+
+$calendar-width: 840px;
+$calendar-height: 490px;
+$calendar-left-side-width: 320px;
+$calendar-right-side-width: 840px - 320px;
+$padding-size: 30px;
+
+.calendar {
+  // Multiple props
+  .calendar-left-side-day-of-week, .current-day-events ul, .add-event-day, .calendar-change-year, .calendar-days li {
+    position: relative;
+  }
+
+  .calendar-left-side-day, .calendar-left-side-day-of-week, .current-day-events, .add-event-day-field-btn, .add-event-day-field {
+    color: white;
+  }
+
+  .calendar-left-side-day-of-week, .calendar-week {
+    text-transform: uppercase;
+  }
+
+  @extend %pos-center;
+  background: white;
+  width: $calendar-width;
+  height: $calendar-height;
+  border-radius: 10px;
+  overflow: hidden;
+  .right-side, .left-side {
+    padding: $padding-size;
+    height: 100%;
+  }
+
+  // LEFT SIDE
+  .left-side {
+    width: $calendar-left-side-width;
+    background: $red-side-color;
+    float: left;
+  }
+
+  .current-day, .current-day-events {
+    padding-top: 40px;
+  }
+
+  .current-day-events {
+    height: 215px;
+  }
+
+  .current-day-events ul {
+    padding-left: $padding-size;
+    list-style: none;
+
+    li::before {
+      content: '-';
+      position: absolute;
+      left: 3px;
+    }
+  }
+
+  h1.calendar-left-side-day {
+    font-size: 92px;
+  }
+
+  .add-event-day {
+    // input events
+    border-bottom: 1px solid white;
+    .add-event-day-field {
+      border: none;
+      background: transparent;
+      height: 34px;
+      width: 100%;
+      font-size: 16px;
+      padding-right: $padding-size;
+    }
+
+    .add-event-day-field:focus {
+      outline: none;
+    }
+
+    .add-event-day-field::placeholder {
+      color: $year-and-next-month-color
+    }
+
+    .add-event-day-field-btn {
+      @extend %pos-center;
+      left: inherit;
+      line-height: 34px;
+    }
+  }
+
+  // RIGHT SIDE
+  .right-side {
+    width: $calendar-right-side-width;
+    float: right;
+  }
+
+  .calendar-change-year {
+    font-size: 20px;
+    .calendar-change-year-slider {
+      margin: $padding-size / 2 0;
+      color: $week-color;
+    }
+
+    .calendar-change-year-slider .fa:hover {
+      color: darken($week-color, 20%)
+    }
+
+  }
+
+  .calendar-days, .calendar-week, .calendar-month {
+    list-style: none;
+    font-size: 0;
+    li {
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+
+  .calendar-month li {
+    width: calc(#{$calendar-right-side-width - $padding-size * 2} / 12);
+    height: 30px;
+    line-height: 30px;
+    color: $month-color;
+    font-size: 13px;
+    &.active {
+      color: $active-month-color;
+      font-weight: 600;
+    }
+  }
+
+  .calendar-days li {
+    width: calc(#{$calendar-right-side-width - $padding-size * 2} / 7);
+    height: 50px;
+    line-height: 50px;
+
+    &:after {
+      @extend %pos-center;
+      content: attr(data-day);
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      color: $day-color;
+    }
+
+    &.another-month:after {
+      color: $year-and-next-month-color;
+    }
+
+    &:hover:after, &.selected-day:after, &.event-day:before, &.active-day:after {
+      border-radius: 50%;
+
+    }
+
+    &:hover:after, &.selected-day:after {
+      background: $year-and-next-month-color;
+      color: white;
+    }
+
+    &.event-day:before {
+      content: ' ';
+      width: 5px;
+      height: 5px;
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      background: $blue-event;
+    }
+
+    &.active-day:after {
+      color: white;
+      background: $red-side-color;
+    }
+  }
+
+  .calendar-week {
+    margin-bottom: $padding-size;
+    font-weight: 600;
+    color: $week-color;
+    border-top: 1px solid $year-and-next-month-color;
+    li {
+      width: calc(#{$calendar-right-side-width - $padding-size * 2} / 7);
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+
+}

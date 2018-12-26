@@ -1,0 +1,21 @@
+{
+  "name": "template",
+  "homepage": "https://github.com/neat-developer/template",
+  "authors": [
+    "zidein <zidein07@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "font-awesome": "Font-Awesome#v4.7"
+  }
+}
